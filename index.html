@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Anime · One Piece · Naruto · Dragón Ball</title>
+    <!-- Font Awesome 6 (iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* RESET Y ESTILOS GLOBALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b0c1e 0%, #1a1f3a 100%);
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* ENCABEZADO CON MOVIMIENTO */
+        .header-anime {
+            position: relative;
+            text-align: center;
+            padding: 2rem 1rem 4rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(6px);
+            border-bottom: 3px solid #ffcc00;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            z-index: 5;
+        }
+
+        .header-anime h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #fae35f, #ff7b00, #f03b3b, #a95eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 5px;
+            animation: brilloHeader 2.5s infinite alternate;
+            text-shadow: 0 0 20px #ff9900;
+        }
+
+        @keyframes brilloHeader {
+            0% { filter: drop-shadow(0 0 2px #fff); }
+            100% { filter: drop-shadow(0 0 20px #ffd966); }
+        }
+
+        .subtitulo {
+            font-size: 1.8rem;
+            color: #ddd;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            animation: flotarTexto 3s ease-in-out infinite;
+        }
+
+        @keyframes flotarTexto {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
+        .subtitulo span {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid gold;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ICONOS REDES SOCIALES VOLADORES (siempre en movimiento) */
+        .social-flotantes {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-flotantes a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            border: 2px solid #ffcc00;
+            color: white;
+            font-size: 2rem;
+            transition: 0.3s;
+            animation: flotarIcono 2.2s infinite alternate ease-in-out;
+            box-shadow: 0 0 25px gold;
+        }
+
+        .social-flotantes a:nth-child(2) { animation-delay: 0.5s; }
+        .social-flotantes a:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes flotarIcono {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(8deg); }
+        }
+
+        .social-flotantes a:hover {
+            background: gold;
+            color: black;
+            transform: scale(1.2);
+            animation-play-state: paused;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .contenedor {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* CADA BLOQUE DE PERSONAJE CON MOVIMIENTO */
+        .personaje {
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        .personaje h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 8px solid #ffcc00;
+            text-shadow: 4px 4px 0 #aa00ff;
+            letter-spacing: 2px;
+            animation: latido 2s infinite;
+            transform-origin: left;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); text-shadow: 6px 6px 0 #ff44ee; }
+        }
+
+        /* GALERÍA DE IMÁGENES CON EFECTO 3D Y DESPLAZAMIENTO */
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            perspective: 1200px;
+        }
+
+        .card {
+            width: 260px;
+            height: 320px;
+            border-radius: 30px 10px 30px 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.6);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 2px solid rgba(255, 215, 0, 0.7);
+            animation: levitar 3.5s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        /* cada carta se mueve independiente */
+        .card:nth-child(1) { animation-delay: 0s; }
+        .card:nth-child(2) { animation-delay: 0.6s; }
+        .card:nth-child(3) { animation-delay: 1.2s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+
+        @keyframes levitar {
+            0% { transform: translateY(0) rotateX(0deg) rotateZ(0deg); }
+            100% { transform: translateY(-28px) rotateX(2deg) rotateZ(1deg); }
+        }
+
+        .card:hover {
+            animation-play-state: paused;
+            transform: scale(1.08) rotateZ(0.5deg);
+            box-shadow: 0 40px 60px gold;
+            border-color: white;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s;
+        }
+
+        .card:hover img {
+            transform: scale(1.2) rotate(2deg);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, #000000dd, transparent);
+            color: white;
+            padding: 1.5rem 0.5rem 0.5rem;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.4s;
+            backdrop-filter: blur(3px);
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .card:hover .overlay {
+            transform: translateY(0);
+        }
+
+        /* IMAGEN DESTACADA EN MOVIMIENTO (una特别 para cada personaje) */
+        .movimiento-especial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 3rem 0 2rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .especial-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50% 20% 50% 20%;
+            background: gold;
+            padding: 6px;
+            animation: girarInfinito 14s linear infinite, cambioColor 4s alternate infinite;
+            box-shadow: 0 0 50px #ffb347;
+        }
+
+        @keyframes girarInfinito {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes cambioColor {
+            0% { filter: hue-rotate(0deg) drop-shadow(0 0 15px red); }
+            50% { filter: hue-rotate(120deg) drop-shadow(0 0 30px blue); }
+            100% { filter: hue-rotate(240deg) drop-shadow(0 0 15px lime); }
+        }
+
+        .especial-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50% 20% 50% 20%;
+            border: 4px solid white;
+        }
+
+        /* PIE DE PÁGINA CON MOVIMIENTO */
+        footer {
+            background: #0b0c1e;
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px dashed #ffcc00;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-text {
+            font-size: 1.4rem;
+            animation: deslizar 10s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes deslizar {
+            0% { transform: translateX(100%); }
+            50% { transform: translateX(-20%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .footer-estatico {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        /* FONDOS ANIMADOS (estrellas kawaii) */
+        .fondo-animado {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .fondo-animado i {
+            position: absolute;
+            color: rgba(255, 255, 100, 0.3);
+            font-size: 2rem;
+            animation: flotarFondo 8s infinite alternate;
+        }
+
+        @keyframes flotarFondo {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
+            100% { transform: translate(40px, -60px) rotate(30deg); opacity: 0.8; }
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .header-anime h1 { font-size: 2.5rem; }
+            .subtitulo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- FONDO CON ICONOS FLOTANTES (siempre en movimiento) -->
+<div class="fondo-animado">
+    <i class="fas fa-star" style="top: 10%; left: 5%;"></i>
+    <i class="fas fa-star" style="top: 70%; left: 85%; animation-duration: 12s;"></i>
+    <i class="fas fa-star" style="top: 30%; left: 20%; animation-duration: 6s;"></i>
+    <i class="fas fa-star" style="top: 80%; left: 40%;"></i>
+    <i class="fas fa-star" style="top: 20%; left: 90%;"></i>
+    <i class="fas fa-star" style="top: 50%; left: 10%;"></i>
+    <i class="fas fa-star" style="top: 85%; left: 70%;"></i>
+    <i class="fas fa-star" style="top: 45%; left: 60%;"></i>
+    <i class="fas fa-star" style="top: 15%; left: 45%;"></i>
+</div>
+
+<!-- ENCABEZADO CON MOVIMIENTO -->
+<header class="header-anime">
+    <h1>⚡ ANIMEVERSE ⚡</h1>
+    <div class="subtitulo">
+        <span>One Piece</span>
+        <span>Naruto</span>
+        <span>Dragon Ball</span>
+        <span>Zoro</span>
+        <span>Luffy</span>
+        <span>Goku</span>
+    </div>
+    <p style="margin-top: 1.5rem; font-size: 1.5rem; letter-spacing: 3px;">
+        <i class="fas fa-scroll"></i> ¡La página que respira anime! <i class="fas fa-dragon"></i>
+    </p>
+</header>
+
+<!-- BOTONES REDES FLOTANTES -->
+<div class="social-flotantes">
+    <a href="#"><i class="fab fa-discord"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<main class="contenedor">
+
+    <!-- SECCIÓN: ONE PIECE (LUFFY, ZORRO) -->
+    <section class="personaje">
+        <h2><i class="fas fa-skull-crossbones"></i> ONE PIECE · Luffy & Zoro</h2>
+        <div class="galeria">
+            <!-- cards Luffy -->
+            <div class="card">
+                <img src="https://preview.redd.it/t5y86fyqwk171.png?auto=webp&s=acb521be907d0b17a10ce9a54dea9d465e7b0574" alt="Luffy sonriendo">
+                <div class="overlay">MONKEY D. LUFFY</div>
+            </div>
+            <div class="card">
+                <img src="https://lh6.googleusercontent.com/proxy/519v9BwnPXIkuN92hOOaZC3A0THoCwakuYyM3l80W0UEsc6yKHlZ0DVioyf0w53f-eOhftsJ1VPd_0Xkg7Q_mnrUzI-W0l0eYU1vanm8afSRoG2xqn36" alt="Luffy gear fifth">
+                <div class="overlay">GEAR 5</div>
+            </div>
+            <!-- cards Zoro -->
+            <div class="card">
+                <img src="https://wallpapers.com/images/featured/roronoa-zoro-hfxnwuxph7uv5tsu.jpg" alt="Zoro espadas">
+                <div class="overlay">RORONOA ZORO</div>
+            </div>
+            <div class="card">
+                <img src="https://static.wikia.nocookie.net/onepiece/images/a/ae/Enma_extrae_el_haki_de_Zoro.png/revision/latest/scale-to-width-down/2560?cb=20201227115447&path-prefix=es" alt="Zoro en wano">
+                <div class="overlay">ENMA · WANO</div>
+            </div>
+        </div>
+        <!-- Imagen especial en movimiento (Luffy + Zoro) -->
+        <div class="movimiento-especial">
+            <div class="especial-img">
+                <img src="https://pbs.twimg.com/media/EmQoG2hWEAQ3xeI.jpg" alt="Luffy y Zoro juntos">
+            </div>
+            <div class="especial-img">
+                <img src="https://e0.pxfuel.com/wallpapers/519/223/desktop-wallpaper-luffy-luffy-straw-hat.jpg" alt="Sombrero de paja">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: NARUTO -->
+    <section class="personaje">
+        <h2><i class="fas fa-paw"></i> NARUTO · Naruto Uzumaki</h2>
+        <div class="galeria">
+            <div class="card">
+                <img src="https://static.wikia.nocookie.net/naruto/images/d/dc/Modo_Sabio_de_Naruto%2C_impartido_por_los_sapos.png/revision/latest?cb=20221004034051&path-prefix=es" alt="Naruto modo sabio">
+                <div class="overlay">MODO SABIO</div>
+            </div>
+            <div class="card">
+                <img src="https://images.fineartamerica.com/images/artworkimages/medium/3/naruto-vs-kurama-thor-raib.jpg" alt="Naruto y Kurama">
+                <div class="overlay">KURAMA</div>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlPck4gzCytcSAgUe4_WFVxFK996HZ__fYyA&s" alt="Naruto hokage">
+                <div class="overlay">SÉPTIMO HOKAGE</div>
+            </div>
+            <div class="card">
+                <img src="https://preview.redd.it/hot-take-team-7-was-quite-dysfunctional-toxic-and-naruto-v0-u2lvdnie5dra1.jpg?width=1080&crop=smart&auto=webp&s=168017b47bb3f83b732ee7bb9866be6482054d49" alt="Naruto equipo 7">
+                <div class="overlay">EQUIPO 7</div>
+            </div>
+        </div>
+        <!-- Imagen especial naruto en movimiento -->
+        <div class="movimiento-especial">
+            <div class="especial-img">
+                <img src="https://wallpapers.com/images/hd/naruto-rasengan-40tyriddv17qufsw.jpg" alt="Naruto rasengan">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: DRAGON BALL (GOKU) -->
+    <section class="personaje">
+        <h2><i class="fas fa-cloud-sun"></i> DRAGON BALL · Goku</h2>
+        <div class="galeria">
+            <div class="card">
+                <img src="https://media.gq.com.mx/photos/5f6ce732bc946e88f6c96320/master/pass/goky%20ultra%20instinto.jpg" alt="Goku Ultra Instinto">
+                <div class="overlay">ULTRA INSTINTO</div>
+            </div>
+            <div class="card">
+                <img src="https://i.pinimg.com/474x/e4/bb/38/e4bb38ce837af3d41ab736284081492e.jpg" alt="Goku Super Saiyan">
+                <div class="overlay">SUPER SAIYAN</div>
+            </div>
+            <div class="card">
+                <img src="https://codigoespagueti.com/wp-content/uploads/2020/07/Dragon-Ball-RPG-8-bits-RPG.jpg" alt="Goku niño">
+                <div class="overlay">GOKU NIÑO</div>
+            </div>
+            <div class="card">
+                <img src="https://wallpapers.com/images/hd/dragon-ball-z-pictures-twpsm1j07wg15vbs.jpg" alt="Goku y Vegeta">
+                <div class="overlay">VEGETA · GOKU</div>
+            </div>
+        </div>
+        <!-- Imagen especial Goku voladora -->
+        <div class="movimiento-especial">
+            <div class="especial-img">
+                <img src="https://elcomercio.pe/resizer/aaadYEDLSK8_aka_8Uxq8FTOn7g=/1200x900/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/S4WX2EKMLNGNTOFQF6MYAL63PU.jpg" alt="Goku kamehameha">
+            </div>
+            <div class="especial-img">
+                <img src="https://i.pinimg.com/564x/bc/3c/fe/bc3cfea6088dd5301c9ebe569c946cb0.jpg" alt="Goku SSJ3">
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE EXTRA CON PERSONAJES CRUZADOS (MOVIMIENTO PURO) -->
+    <section style="text-align: center; margin: 5rem 0;">
+        <h2 style="font-size: 3rem; animation: latido 2s infinite;">⚡ COMBATE INFINITO ⚡</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem;">
+            <div style="width: 200px; height: 200px; animation: girarInfinito 8s linear infinite;">
+                <img src="https://preview.redd.it/can-luffy-beat-kaido-in-a-straight-1v1-v0-usyxf7w1nqsc1.jpeg?auto=webp&s=d073d4ae82341d9d0595037e11c0a3fc35d03770" alt="Luffy vs Kaido" style="width:100%; height:100%; object-fit: cover; border-radius: 30px; border: 4px solid gold;">
+            </div>
+            <div style="width: 200px; height: 200px; animation: levitar 2s infinite alternate; border-radius: 50%; overflow: hidden; border: 5px solid red;">
+                <img src="https://static.wixstatic.com/media/9a3e46_46ae14216f7247bab6e8d462711de2eb~mv2.jpg/v1/fill/w_520,h_368,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/9a3e46_46ae14216f7247bab6e8d462711de2eb~mv2.jpg" alt="Zoro vs King" style="width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div style="width: 200px; height: 200px; animation: flotarIcono 1.8s infinite alternate;">
+                <img src="https://i1.sndcdn.com/artworks-000327534900-e4v8ai-t500x500.jpg" alt="Goku vs Jiren" style="width:100%; height:100%; object-fit: cover; border-radius: 30% 70% 30% 70%;">
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- PIE DE PÁGINA CON MOVIMIENTO -->
+<footer>
+    <div class="footer-text">
+        <i class="fas fa-eye"></i> Hecho por y para OTACUS · One Piece · Naruto · Dragon Ball · Zoro · Luffy · Goku <i class="fas fa-eye"></i>
+    </div>
+    <div class="footer-estatico">
+        <p>© 2025 · La página se mueve contigo ·  <i class="fas fa-skull"></i>  imágenes en movimiento eterno</p>
+    </div>
+</footer>
+
+<!-- PEQUEÑO SCRIPT PARA MOVIMIENTO ADICIONAL (alternar clases al pasar ratón) -->
+<script>
+    // (Opcional) más dinamismo: hacer que algunos elementos cambien su animación al pasar el mouse.
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.animation = 'none'; // opcional, ya se pausa con CSS
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.animation = 'levitar 3.5s infinite alternate ease-in-out';
+        });
+    });
+</script>
+
+<!-- NOTA: LAS IMÁGENES SON URL PÚBLICAS; PUEDEN TARDAR EN CARGAR SI NO HAY CONEXión RÁPIDA -->
+</body>
+</html>
